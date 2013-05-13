@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2012  Benjamin Boksa (http://www.boksa.de/)
+ * Copyright (C) 2013  Reginald Eli A. Deinla
  * 
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
@@ -48,9 +49,9 @@ public class RTRESTClient {
 			return this.formatString;
 		}
 	}
-	
-	private static final Pattern PATTERN_RESPONSE_BODY = Pattern.compile("^(.*) (\\d+) (.*)\n((.*\n)*)", Pattern.MULTILINE);
-		
+
+	private static final Pattern PATTERN_RESPONSE_META = Pattern.compile("^(.*) (\\d+) (.*)");
+			
 	private String restInterfaceBaseURL;
 	private String username;
 	private String password;
@@ -120,15 +121,25 @@ public class RTRESTClient {
 		HttpResponse httpResponse = this.httpClient.execute(postRequest);
 		
 		String responseBody = IOUtils.toString(httpResponse.getEntity().getContent(), HTTP.UTF_8);
-				
-		Matcher matcher = PATTERN_RESPONSE_BODY.matcher(responseBody);
 		
-		if (matcher.matches()) {
+		String[] responseSplit = responseBody.split("\n", 2);
+		
+		String header = responseSplit[0];
+		
+		String body = "";
+		
+		if (responseSplit.length == 2) {
+			body = responseSplit[1];
+		}
+
+		Matcher metaMatcher = PATTERN_RESPONSE_META.matcher(header);
+		
+		if (metaMatcher.matches()) {
 			RTRESTResponse response = new RTRESTResponse();
-			response.setVersion(matcher.group(1));
-			response.setStatusCode(Long.valueOf(matcher.group(2)));
-			response.setStatusMessage(matcher.group(3));
-			response.setBody(matcher.group(4).trim());
+			response.setVersion(metaMatcher.group(1));
+			response.setStatusCode(Long.valueOf(metaMatcher.group(2)));
+			response.setStatusMessage(metaMatcher.group(3));
+			response.setBody(body);
 			return response;
 		} else {
 			System.err.println("not matched");
