@@ -15,17 +15,20 @@ Copyright (C) 2012  Benjamin Boksa (http://www.boksa.de/)
   limitations under the License.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <parent>
-    <artifactId>maven-default-pom</artifactId>
-    <groupId>de.boksa.maven.defaults</groupId>
-    <version>0.1.0</version>
-  </parent>
   <modelVersion>4.0.0</modelVersion>
-  <groupId>de.boksa.rt</groupId>
-  <artifactId>rt-rest</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
- 
+
+  <groupId>com.slab7</groupId>
+  <artifactId>rt-rest2</artifactId>
+  <version>0.0.2-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>rt-rest2</name>
+  <url>http://maven.apache.org</url>
+
   <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <internal.repo.path>file:///Users/aldrineg/github/rt/mvn-repo</internal.repo.path>
+    <!--  -->
     <httpclient.version>4.1.1</httpclient.version>
     <commons-io.version>1.4</commons-io.version>
     <commons-beanutils.version>1.8.0</commons-beanutils.version>
@@ -73,12 +76,13 @@ Copyright (C) 2012  Benjamin Boksa (http://www.boksa.de/)
     </dependency>            
 
   </dependencies>
- 
-  <repositories>  
-     <repository>
-      <id>boksa-repository</id>
-      <url>https://services.boksa.de/maven/repositories/boksa</url>
+  
+  <distributionManagement>
+    <repository>
+      <id>internal.repo</id>
+      <name>Internal Repository</name>
+      <url>${internal.repo.path}</url>
     </repository>
-  </repositories>
+  </distributionManagement>
   
 </project>
