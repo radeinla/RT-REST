@@ -24,7 +24,7 @@ Copyright (C) 2013  Reginald Eli A. Deinla
   <packaging>jar</packaging>
 
   <name>rt-rest2</name>
-  <url>http://maven.apache.org</url>
+  <url>https://github.com/radeinla/RT-REST</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -85,5 +85,18 @@ Copyright (C) 2013  Reginald Eli A. Deinla
       <url>${internal.repo.path}</url>
     </repository>
   </distributionManagement>
+  
+  <build>
+	  <plugins>
+		<plugin>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>2.3.2</version>
+			<configuration>
+				<source>1.6</source>
+				<target>1.6</target>
+			</configuration>
+		</plugin>
+	   </plugins>
+   </build>
   
 </project>
