@@ -17,4 +17,5 @@ for a demo.
 ***
 
 Copyright (C) 2012  Benjamin Boksa (http://www.boksa.de/).
+Copyright (C) 2013  Reginald Eli A. Deinla
 Licensed under the Apache License, Version 2.0. See LICENSE for details.
